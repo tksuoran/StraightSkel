@@ -45,7 +45,6 @@
 #include "data/3d/skel/SkelVertexData.h"
 #include "data/3d/skel/SkelEdgeData.h"
 #include "data/3d/skel/SkelFacetData.h"
-#include "db/3d/OBJFile.h"
 #include "util/Configuration.h"
 #include "util/Timer.h"
 #include "util/StringFactory.h"
@@ -367,9 +366,6 @@ void SimpleStraightSkel::run() {
             } else if (event->getType() == AbstractEvent::SAVE_OFFSET_EVENT) {
                 event->setPolyhedronResult(polyhedron);
                 skel_result_->addEvent(event);
-                std::stringstream ss_filename;
-                ss_filename << "offset_" << offset << ".obj";
-                db::_3d::OBJFile::save(ss_filename.str(), polyhedron);
                 save_offsets_.pop_front();
             } else if (event->getType() == AbstractEvent::EDGE_EVENT) {
                 handleEdgeEvent(std::dynamic_pointer_cast<EdgeEvent>(event), polyhedron);

@@ -13,11 +13,10 @@ Timer::~Timer() {
 }
 
 double Timer::now() {
-    double result = 0.0;
-    boost::posix_time::ptime now = boost::posix_time::microsec_clock::universal_time();
-    boost::posix_time::time_duration duration = now - boost::posix_time::from_time_t(0);
-    result = ((double)duration.total_milliseconds() / 1000.0);
-    return result;
+    auto now = std::chrono::system_clock::now();
+    auto duration = now.time_since_epoch();
+    auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+    return static_cast<double>(millis) / 1000.0;
 }
 
 }

@@ -11,8 +11,8 @@
 #include "algo/3d/AbstractVertexSplitter.h"
 #include "data/3d/ptrs.h"
 #include "data/3d/skel/ptrs.h"
-#include <boost/shared_array.hpp>
 #include <list>
+#include <memory>
 #include <vector>
 #include <string>
 
@@ -21,7 +21,7 @@ namespace algo { namespace _3d {
 using namespace data::_3d;
 using namespace data::_3d::skel;
 
-typedef boost::shared_array<int> vec2i;
+typedef std::shared_ptr<int[]> vec2i;
 typedef std::vector<vec2i> combi;
 
 class CombiVertexSplitter : public AbstractVertexSplitter {

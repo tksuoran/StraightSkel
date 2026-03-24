@@ -6,7 +6,7 @@
 
 #include "util/StringFactory.h"
 
-#include <boost/date_time/local_time/local_time.hpp>
+#include <ctime>
 #include <sstream>
 
 namespace util {
@@ -90,19 +90,12 @@ std::string StringFactory::replaceAll(const std::string& str, const std::string&
 }
 
 std::string StringFactory::now(const std::string& format) {
-    boost::local_time::local_time_facet* facet =
-            new boost::local_time::local_time_facet(format.c_str());
-    std::stringstream date_stream;
-    date_stream.imbue(std::locale(date_stream.getloc(), facet));
-    date_stream << boost::local_time::local_microsec_clock::local_time(
-            boost::local_time::time_zone_ptr());
-    return date_stream.str();
-//    time_t rawtime;
-//    time(&rawtime);
-//    struct tm * timeinfo = localtime(&rawtime);
-//    char result[256];
-//    strftime(result, sizeof(result), format.c_str(), timeinfo);
-//    return string(result);
+    time_t rawtime;
+    time(&rawtime);
+    struct tm * timeinfo = localtime(&rawtime);
+    char result[256];
+    strftime(result, sizeof(result), format.c_str(), timeinfo);
+    return std::string(result);
 }
 
 }

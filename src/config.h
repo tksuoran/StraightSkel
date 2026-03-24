@@ -1,7 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define DEBUG
-/* #undef USE_CGAL */
+/* #undef DEBUG */
 
 #endif /* CONFIG_H */
